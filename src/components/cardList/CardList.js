@@ -3,7 +3,6 @@ import Card from '../card/Card';
 import { StyledCardList } from './style';
 
 export const CardList = ({ profiles }) => {
-	console.log(' PROFILES CARDLIST', profiles);
 	return (
 		<StyledCardList>
 			{profiles &&

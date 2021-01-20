@@ -7,4 +7,5 @@ export const StyledCardList = styled.div`
 	margin-top: 20px;
 	display: flex;
 	flex-wrap: wrap;
+	padding-bottom: 200px;
 `;

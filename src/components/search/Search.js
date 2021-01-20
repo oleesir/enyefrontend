@@ -7,7 +7,7 @@ const search = ({ handleChange }) => {
 			<StyledInput
 				type='text'
 				name='search'
-				placeholder='Search for articles'
+				placeholder='Search for customers'
 				onChange={handleChange}
 			/>
 		</div>

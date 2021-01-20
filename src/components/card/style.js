@@ -7,6 +7,7 @@ export const StyledCard = styled.div`
 	padding: 5px 8px;
 	border: 1px solid grey;
 	border-radius: 5px;
+	background-color: #f0f0f0;
 `;
 
 export const StyledInfo = styled.p`

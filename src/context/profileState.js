@@ -11,6 +11,7 @@ const AuthState = (props) => {
 		filteredProfiles: [],
 		genders: [],
 		paymentMethods: [],
+		isLoading: true,
 	};
 
 	const [state, dispatch] = useReducer(ProfileReducer, initialState);
@@ -20,8 +21,6 @@ const AuthState = (props) => {
 		paymentMethod: '',
 	});
 	const [searchTerm, setSearchTerm] = useState('');
-
-	console.log('searchTerm', searchTerm);
 
 	const getProfiles = async () => {
 		const config = {
@@ -35,8 +34,6 @@ const AuthState = (props) => {
 				'https://api.enye.tech/v1/challenge/records',
 				config,
 			);
-
-			console.log('PROFILES', res);
 
 			dispatch({
 				type: GET_USERS,
@@ -75,13 +72,6 @@ const AuthState = (props) => {
 			if (searchTerm) {
 				const lowerCaseSearchTerm = searchTerm.toLowerCase();
 				reFilteredProfiles = reFilteredProfiles.filter((profile) => {
-					console.log(
-						'sadfg34567hjkl',
-						profile.FirstName.toLowerCase().includes(lowerCaseSearchTerm),
-						profile.FirstName.toLowerCase().includes(lowerCaseSearchTerm)
-							? profile
-							: null,
-					);
 					return (
 						profile.FirstName.toLowerCase().includes(lowerCaseSearchTerm) ||
 						profile.LastName.toLowerCase().includes(lowerCaseSearchTerm) ||
@@ -89,8 +79,6 @@ const AuthState = (props) => {
 						profile.Email.toLowerCase().includes(lowerCaseSearchTerm)
 					);
 				});
-
-				console.log('sadfghjkl', filteredProfiles, reFilteredProfiles);
 			}
 
 			dispatch({
@@ -105,6 +93,7 @@ const AuthState = (props) => {
 			value={{
 				profiles: state.profiles,
 				filteredProfiles: state.filteredProfiles,
+				isLoading: state.isLoading,
 				getProfiles,
 				filters,
 				setFilters,

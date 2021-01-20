@@ -2,17 +2,20 @@ import styled from 'styled-components';
 
 export const StyledHome = styled.div`
 	width: 100%;
-	height: 100vh;
 	display: flex;
 	justify-content: center;
+	background-color: #5e468a;
+	height: 100vh;
 `;
 
 export const StyledContent = styled.div`
 	width: 80%;
 	display: flex;
 	flex-direction: column;
-	border: 1px solid blue;
 	align-items: center;
+	background-color: #5e468a;
+	height: 100vh;
+	overflow: scroll;
 `;
 
 export const CenterSearchInput = styled.div`
@@ -22,11 +25,15 @@ export const CenterSearchInput = styled.div`
 `;
 
 export const CheckBoxForm = styled.div`
-	width: 40%;
+	width: 60%;
 	display: flex;
 	justify-content: space-around;
 	align-items: center;
 	margin-top: 10px;
+	> p {
+		color: #eae9ee;
+		font-size: 25px;
+	}
 `;
 
 export const CheckBox = styled.label`
@@ -54,6 +61,18 @@ export const CheckBoxInput = styled.input`
 `;
 
 export const CheckBoxSpan = styled.span`
-	color: #34495e;
+	color: #eae9ee;
 	padding: 0.5rem 0.25rem;
+`;
+
+export const StyledFooter = styled.div`
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	border-radius: 5px;
+	background-color: #f0f0f0;
 `;

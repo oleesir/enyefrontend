@@ -10,6 +10,7 @@ export default (state, action) => {
 				...state,
 				profiles: action.payload,
 				filteredProfiles: action.payload,
+				isLoading: false,
 				genders: Array.from(
 					new Set(
 						action.payload.map((profile) => profile.Gender.toLowerCase()),
@@ -24,14 +25,15 @@ export default (state, action) => {
 				),
 			};
 		case SET_FILTERED_USERS:
-			console.log('reduce', action.payload);
 			return {
 				...state,
+				isLoading: false,
 				filteredProfiles: action.payload,
 			};
 		case GET_USERS_ERROR:
 			return {
 				...state,
+				isLoading: false,
 				error: action.payload,
 			};
 		default:

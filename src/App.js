@@ -1,5 +1,5 @@
-import Home from '../src/container/home/Home';
-import ProfileState from '../../enyefrontend/src/context/profileState';
+import Home from './container/home/Home';
+import ProfileState from './context/profileState';
 import './App.css';
 
 function App() {

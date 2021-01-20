@@ -4,10 +4,9 @@ export const StyledPagination = styled.div`
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	position: fixed;
 	left: 0;
 	bottom: 0;
-	width: 100%;
+	width: 60%;
 `;
 
 export const StyledLinks = styled.a`

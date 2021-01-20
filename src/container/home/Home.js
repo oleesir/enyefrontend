@@ -7,13 +7,14 @@ import {
 	CheckBox,
 	CheckBoxSpan,
 	CheckBoxInput,
+	StyledFooter,
 } from '../home/style';
 import Aux from '../../hoc/Aux';
 import ProfileContext from '../../context/profileContext';
 import Search from '../../components/search/Search';
 import CardList from '../../components/cardList/CardList';
+import Spinner from '../../components/loader/Loader';
 import Pagination from '../../components/pagination/Pagination';
-import SearchBtn from '../../components/search-button/SearchButton';
 
 export const Home = () => {
 	const profileContext = useContext(ProfileContext);
@@ -27,22 +28,15 @@ export const Home = () => {
 		filters: { gender, paymentMethod },
 		searchTerm,
 		setSearchTerm,
+		isLoading,
 	} = profileContext;
 	const [currentPage, setCurrentPage] = useState(1);
 	const [profilesPerPage] = useState(20);
-
-	console.log(filteredProfiles);
 
 	useEffect(() => {
 		getProfiles();
 		// eslint-disable-next-line
 	}, []);
-
-	// filterCompleted = (filter) => {
-	// 	this.setState({
-	// 		filterGender: [...profiles.filter((todo) => (filter ? todo.Gender : ''))],
-	// 	});
-	// };
 
 	const handleFilter = (event) => {
 		setFilters({
@@ -50,8 +44,6 @@ export const Home = () => {
 			[event.target.name]: event.target.checked ? event.target.value : '',
 		});
 	};
-
-	console.log('filteredProfiles', filteredProfiles);
 
 	const indexOfLastPage = currentPage * profilesPerPage;
 	const indexOfFirstPage = indexOfLastPage - profilesPerPage;
@@ -69,48 +61,53 @@ export const Home = () => {
 	return (
 		<Aux>
 			<StyledHome>
-				<StyledContent>
-					<CenterSearchInput>
-						<Search value={searchTerm} handleChange={handleInputChange} />
-					</CenterSearchInput>
-					Filters
-					<CheckBoxForm>
-						Gender
-						{genders.map((item) => (
-							<CheckBox key={item.Email}>
-								<CheckBoxInput
-									type='checkbox'
-									name='gender'
-									value={item}
-									checked={item === gender}
-									onChange={handleFilter}
-								/>
-								<CheckBoxSpan>{item}</CheckBoxSpan>
-							</CheckBox>
-						))}
-					</CheckBoxForm>
-					<CheckBoxForm>
-						Payment Method
-						{paymentMethods.map((item) => (
-							<CheckBox key={item.Email}>
-								<CheckBoxInput
-									type='checkbox'
-									name='paymentMethod'
-									value={item}
-									checked={item === paymentMethod}
-									onChange={handleFilter}
-								/>
-								<CheckBoxSpan>{item}</CheckBoxSpan>
-							</CheckBox>
-						))}
-					</CheckBoxForm>
-					<CardList profiles={currentProfiles} />
+				{isLoading && <Spinner />}
+				{!isLoading && (
+					<StyledContent>
+						<CenterSearchInput>
+							<Search value={searchTerm} handleChange={handleInputChange} />
+						</CenterSearchInput>
+						<CheckBoxForm>
+							<p>Gender</p>
+							{genders.map((item) => (
+								<CheckBox key={item.Email}>
+									<CheckBoxInput
+										type='checkbox'
+										name='gender'
+										value={item}
+										checked={item === gender}
+										onChange={handleFilter}
+									/>
+									<CheckBoxSpan>{item}</CheckBoxSpan>
+								</CheckBox>
+							))}
+						</CheckBoxForm>
+						<CheckBoxForm>
+							<p>Payment Method</p>
+							{paymentMethods.map((item) => (
+								<CheckBox key={item.Email}>
+									<CheckBoxInput
+										type='checkbox'
+										name='paymentMethod'
+										value={item}
+										checked={item === paymentMethod}
+										onChange={handleFilter}
+									/>
+									<CheckBoxSpan>{item}</CheckBoxSpan>
+								</CheckBox>
+							))}
+						</CheckBoxForm>
+						<CardList profiles={currentProfiles} />
+					</StyledContent>
+				)}
+
+				<StyledFooter>
 					<Pagination
 						profilesPerPage={profilesPerPage}
 						totalProfiles={filteredProfiles.length}
 						paginate={paginate}
 					/>
-				</StyledContent>
+				</StyledFooter>
 			</StyledHome>
 		</Aux>
 	);
